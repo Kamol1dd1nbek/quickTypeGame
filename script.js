@@ -140,7 +140,7 @@ const timeInterval = setInterval(updateTime, 1000);
 
 function gameOver() {
     endGameEl.innerHTML = `
-    <h1<Time Over</h1>
+    <h1>Time Over</h1>
     <h3>Your score: ${score}</h3>
     <button onclick="location.reload()">Retry</button>
     `;
