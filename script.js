@@ -108,3 +108,53 @@ const words = [
   "Phone",
 ];
 
+let randomWord;
+let score = 0;
+let time = 60;
+
+function getRandomWord() {
+    return words[Math.floor(Math.random() * words.length)];
+}
+
+function addToDom() {
+    randomWord = getRandomWord();
+    word.innerHTML = randomWord.toLowerCase();
+}
+
+function updateScore() {
+    score++;
+    scoreEl.innerHTML = score;
+}
+
+function updateTime() {
+    time--;
+    timeEl.innerHTML = time + "s";
+
+    if (time === 0) {
+        clearInterval(timeInterval);
+        gameOver();
+    }
+}
+
+const timeInterval = setInterval(updateTime, 1000);
+
+function gameOver() {
+    endGameEl.innerHTML = `
+    <h1<Time Over</h1>
+    <h3>Your score: ${score}</h3>
+    <button onclick="location.reload()">Retry</button>
+    `;
+    endGameEl.style.display = "flex";
+}
+
+addToDom();
+
+text.addEventListener("input", (e) => {
+    const typedText = e.target.value;
+    if ( typedText === randomWord.toLowerCase() ) {
+        updateScore();
+        addToDom();
+        e.target.value = "";
+        updateTime();
+    }
+});
